@@ -1,6 +1,7 @@
 package transport
 
 import (
+	"log"
 	"net/http"
 
 	_ "github.com/shop/docs"
@@ -23,10 +24,8 @@ import (
 // @host localhost:8082
 // @BasePath /
 func ServerApp() {
-	http.HandleFunc("/swagger/", httpSwagger.WrapHandler)
-
-	http.HandleFunc("/registration", Registration)
-	// http.HandleFunc("/users/profile", userProfile)
-
-	http.ListenAndServe(":8000", nil)
+	http.Handle("/registration", Logging(Registration))
+	http.Handle("/swagger/", Logging(httpSwagger.WrapHandler))
+	log.Println("Сервер запущен на порту 8000")
+	log.Fatal(http.ListenAndServe(":8000", nil))
 }
