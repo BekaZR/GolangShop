@@ -18,7 +18,7 @@ const docTemplate = `{
     "paths": {
         "/registration": {
             "post": {
-                "description": "Registration",
+                "description": "Получить список всех пользователей в системе",
                 "consumes": [
                     "application/json"
                 ],
@@ -26,14 +26,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "registration"
+                    "Users"
                 ],
-                "summary": "Registration",
-                "operationId": "registration",
+                "summary": "Получить список пользователей",
                 "parameters": [
                     {
-                        "description": "Registration Input",
-                        "name": "registration",
+                        "description": "registration",
+                        "name": "input",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -45,7 +44,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/schema.Error"
+                            "$ref": "#/definitions/schema.User"
                         }
                     }
                 }
@@ -53,14 +52,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "schema.Error": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
         "schema.User": {
             "type": "object",
             "properties": {

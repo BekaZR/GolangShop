@@ -16,14 +16,17 @@ import (
 // @contact.url https://linggar.asia
 // @contact.email x@linggar.asia
 
-// @host localhost:8000
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+
+// @host localhost:8082
 // @BasePath /
 func ServerApp() {
 	http.HandleFunc("/swagger/", httpSwagger.WrapHandler)
 
-	// http.HandleFunc("/auth/login", authLogin)
-	// http.HandleFunc("/users/profile", userProfile)
 	http.HandleFunc("/registration", Registration)
+	// http.HandleFunc("/users/profile", userProfile)
 
 	http.ListenAndServe(":8000", nil)
 }

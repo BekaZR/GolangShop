@@ -1,9 +1,4 @@
 definitions:
-  schema.Error:
-    properties:
-      message:
-        type: string
-    type: object
   schema.User:
     properties:
       password:
@@ -18,12 +13,11 @@ paths:
     post:
       consumes:
       - application/json
-      description: Registration
-      operationId: registration
+      description: Получить список всех пользователей в системе
       parameters:
-      - description: Registration Input
+      - description: registration
         in: body
-        name: registration
+        name: input
         required: true
         schema:
           $ref: '#/definitions/schema.User'
@@ -33,8 +27,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/schema.Error'
-      summary: Registration
+            $ref: '#/definitions/schema.User'
+      summary: Получить список пользователей
       tags:
-      - registration
+      - Users
 swagger: "2.0"

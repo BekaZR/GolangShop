@@ -6,7 +6,7 @@
     "paths": {
         "/registration": {
             "post": {
-                "description": "Registration",
+                "description": "Получить список всех пользователей в системе",
                 "consumes": [
                     "application/json"
                 ],
@@ -14,14 +14,13 @@
                     "application/json"
                 ],
                 "tags": [
-                    "registration"
+                    "Users"
                 ],
-                "summary": "Registration",
-                "operationId": "registration",
+                "summary": "Получить список пользователей",
                 "parameters": [
                     {
-                        "description": "Registration Input",
-                        "name": "registration",
+                        "description": "registration",
+                        "name": "input",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -33,7 +32,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/schema.Error"
+                            "$ref": "#/definitions/schema.User"
                         }
                     }
                 }
@@ -41,14 +40,6 @@
         }
     },
     "definitions": {
-        "schema.Error": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
         "schema.User": {
             "type": "object",
             "properties": {

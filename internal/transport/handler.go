@@ -7,30 +7,29 @@ import (
 	"github.com/shop/internal/schema"
 )
 
-// Registration godoc
-// @Summary Registration
-// @Description Registration
-// @Tags registration
-// @ID registration
+// @Summary Получить список пользователей
+// @Description Получить список всех пользователей в системе
+// @Tags Users
 // @Accept  json
 // @Produce  json
-// @Param registration body schema.User true "Registration Input"
-// @Success 200 {object} schema.Error
+// @Success 200 {object} schema.User
+// @Param   input   body   schema.User 	true "registration"
 // @Router /registration [post]
 func Registration(w http.ResponseWriter, r *http.Request) {
 	var user schema.User
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
-		// Обработайте ошибку некорректных данных
-		http.Error(w, "Invalid JSON data", http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	response := struct {
-		Message string `json:"message"`
-	}{
-		Message: "User registered successfully",
+	jsonData, err := json.Marshal(user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
+	// Отправляем ответ
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }
