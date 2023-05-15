@@ -1,4 +1,40 @@
+definitions:
+  schema.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  schema.User:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /registration:
+    post:
+      consumes:
+      - application/json
+      description: Registration
+      operationId: registration
+      parameters:
+      - description: Registration Input
+        in: body
+        name: registration
+        required: true
+        schema:
+          $ref: '#/definitions/schema.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schema.Error'
+      summary: Registration
+      tags:
+      - registration
 swagger: "2.0"
